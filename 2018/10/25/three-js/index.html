@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<meta charset=utf-8>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name=viewport content='width=device-width, initial-scale=1, user-scalable=no'>
+<title>'three.js'</title>
+<meta name=author content='Daoqiu'>
+<!--[if IE]>
+  <meta http-equiv=refresh content='0, http://browsehappy.com'>
+<![endif]-->
+<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css>
+<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css>
+<link rel=stylesheet href=/css/style.css>
+
+
+<body oncontextmenu='return false'>
+  <div class=aios_content>
+    <div class=bg-gradient></div>
+    <div class=bg-pattern></div>
+    <div class=menu-bg>
+  <div class=menu-container>
+    <ul>
+      
+        <li class=menu-item>
+          <a href='/'>Home</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+<nav>
+  <a></a>
+</nav>
+
+    <div class=container style='padding-bottom:40px'>
+      <div class=row>
+  <div class=col-sm-12>
+    <header>
+  <div class=logo>
+    <h1 id=main-title class=title><a href=/>blog</a></h1>
+  </div>
+</header>
+
+
+    <section class=main>
+      <div class=post>
+  <div class=post-header>
+    <h1 class=title>'three.js'</h1>
+    <div class=post-info>
+      <span class=date>2018-10-25</span>
+
+      
+    </div>
+  </div>
+
+  <div class=content>
+    <!-- Gallery -->
+    
+
+    <p>####记three.js常用命令</p>
+<p>/<strong><em> 场景（scene） </em></strong>/<br>var scene = new THREE.Scene(); // 创建场景<br>scene.add(x);                  // 插入场景</p>
+<p>/<strong><em> 相机（camera） </em></strong>/<br>// 正交投影相机<br>var camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);<br>// 透视头像相机<br>var camera = new THREE.PerspectiveCamera(fov, aspect, near, far); // fov：人眼夹角，aspect：长宽比</p>
+<p>/<strong><em> 渲染器（renderer） </em></strong>/<br>var renderer = new THREE.WebGLRenderer(options);<br>// options {} 可选。参数：<br>// canvas：element <canvas></canvas><br>renderer.setSize(长, 宽);<br>element.appendChild(renderer.domElement); // 插入节点<br>renderer.setClearColor(color, opacity);   // 设置清除后的颜色 16进制<br>renderer.clear();                         // 清除面板<br>renderer.render(scene, camera);           // 渲染</p>
+<p>/<strong><em> 光照(light) </em></strong>/<br>new THREE.AmbientLight(颜色);                          // 环境光<br>new THREE.PointLight(颜色, 强度, 距离);                // 点光源<br>new THREE.DirectionalLight(颜色, 亮度);                // 平行光<br>new THREE.SpotLight(颜色, 强度, 距离, 夹角, 衰减指数); // 聚光灯</p>
+<p>/<strong><em> 几何形状 </em></strong>/<br>new THREE.CubeGeometry(长, 宽, 高, 长的分割, 宽的分割, 高的分割);                           // 立方体<br>new THREE.PlanGeometry(长,宽, 长的分割, 宽的分割);                                          // 平面<br>new THREE.SphereGeometry(半径, 经度切片, 纬度切片, 经度开始, 经度跨过, 纬度开始, 纬度跨过); // 球体<br>new THREE.CircleGeometry(半径, 切片数, 开始, 跨过角度);                                     // 圆形<br>new THREE.CylinderGeometry(顶部面积, 底部面积, 高, 圆分割, 高分割, 是否没有顶面和底面);     // 圆台<br>new THREE.TetrahedronGeometry(半径, 细节);  // 正四边形<br>new THREE.OctahedronGeometry(半径, 细节);   // 正八边形<br>new THREE.IconsahedronGeometry(半径, 细节); // 正十二边形<br>new THREE.TorusGeometry(半径, 管道半径, 纬度分割, 经度分割, 圆环面的弧度); // 圆环面<br>// 自定义形状<br>var geometry = new THREE.Geometry();<br>geometry.vertices.push(new THREE.Vectory3(x, y, z)); // 点，其中x、y、z为坐标<br>geometry.faces.push(new THREE.Faces3(x, y, z));      // 面，其中x、y、z为点的数组的索引，三点确定一个面</p>
+<p>/<strong><em> 材质 </em></strong>/<br>new THREE.MeshBasicMaterial(options); // 基本材质<br>// options {} 可选。参数：<br>//   visible：是否可见<br>//     color：颜色<br>// wireframe: 是否渲染线而非面<br>//      side：THREE.FrontSide 正面，THREE.BackSide 反面，THREE.DoubleSide 双面<br>//       map: 贴图<br>new THREE.MeshLambertMaterial(options); // Lambert材质，适合光照<br>//  ambient：反射能力<br>// emissive：自发光颜色<br>new THREE.MeshPhongMaterial();  // Phong材质，适合金属和镜面<br>//  specular：光罩颜色<br>// shininess：光斑大小（值越大，光斑越小）<br>new THREE.MeshNormalMaterial(); // 方向材质<br>/<em> 贴图 </em>/<br>var texture = THREE.ImageUtils.loadTexture(url, {}, function(){}); // 载入单个贴图（建议贴图的长宽为256的倍数）<br>new THREE.MeshFaceMaterial() // 设置不同面的贴图，参数为单个贴图的数组<br>texture.wrapS texture.wrapT = THREE.RepeatWrapping // 贴图的重复方式<br>texture.repeat.set(x, y)     // 重复次数<br>new THREE.texture(canvas)    // 将canvas作为贴图</p>
+<p>/<strong><em> 将模型和贴图结合 </em></strong>/<br>var mesh = new THREE.Mesh(形状, 材质);<br>mesh.position // 位置 mesh.position.x（y、z） 或 mesh.position.set(x, y, z)<br>mesh.scale    // 缩放<br>mesh.rotation // 旋转</p>
+<p>/<strong><em> 监视FPS </em></strong>/<br>var stats = new Stats();<br>stats.domElement // 节点<br>stats.begin()    // 开始<br>stats.end()      // 结束</p>
+<p>/<strong><em> 控制照像机 </em></strong>/<br>var obitControls = new THREE.OrbitControls(Camera); // 将照相机添加到控制器<br>obitControls.update();</p>
+<p>/<strong><em> 获取点击的对象 </em></strong>/<br>var raycaster = new THREE.Raycaster(),<br>    mouse = new THREE.Vector2();<br>// function事件内设置鼠标的坐标<br>mouse.x = (event.clientX / window.innerWidth) <em> 2 - 1;<br>mouse.y = -(event.clientY / window.innerHeight) </em> 2 + 1;<br>// 获取对象<br>raycaster.setFromCamera(mouse, camera);<br>var intersects = raycaster.intersectObjects(Scene.children);<br>intersects[0].object // 你点击的物体</p>
+<p>/<strong><em> TWEEN.js让物体运动 </em></strong>/<br>var t = new TWEEN.Tween(intersects[0].object.position).to({x: 3000, y: 3000, z: 3000}, 1000).easing(TWEEN.Easing.Linear.None).start();<br>TWEEN.update(); // 在运动主函数内执行</p>
+<p>/<strong><em> 载入外部模型 </em></strong>/<br>var loader = new THREE.STLLoader(); // <em>.stl格式的模型<br>loader.load(“/modules/DL_MCAirship.stl”, (modules)=&gt;{/</em> 载入成功后的事件 */}); // modules：载入成功的模型</p>
+<p>/<strong><em> 陀螺仪 </em></strong>/<br>var Devices = new THREE.DeviceOrientationControls(Camera); // 初始化陀螺仪<br>Devices.connect();                                         // 初始化绑定陀螺仪<br>Devices.update();</p>
+<p>/<strong><em> 3dDOM </em></strong>/<br>var ele = THREE.CSS3DObject(element); // 3d的dom<br>var renderer = THREE.CSS3DRenderer(); // 使用的渲染器</p>
+<p>/<strong><em> ASCII字符画 </em></strong>/<br>var Renderer = new THREE.CanvasRenderer();    // 使用的渲染器<br>var Effect = new THREE.AsciiEffect(Renderer); // Effect<br>// 使用文件：<br>// Projector.js<br>// CanvasRenderer.js<br>// AsciiEffect.js</p>
+
+    <span class='date end-date'>2018-10-25</span>
+  </div>
+
+  
+
+  
+</div>
+
+    </section>
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer class=footer-content>
+  <div class=container>
+    <div class=row>
+      <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about'>
+        <h2>About</h2>
+        <section>
+          Hexo learning
+        </section>
+      </div>
+      
+  <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about'>
+    <h2>New Contents</h2>
+    <ul>
+      
+        <li>
+          <a class=footer-post href='/2018/10/25/three-js/'>&#39;three.js&#39;</a>
+        </li>
+      
+        <li>
+          <a class=footer-post href='/2018/05/30/vscode/'>vscode</a>
+        </li>
+      
+        <li>
+          <a class=footer-post href='/2018/04/10/blog/'>Markdown</a>
+        </li>
+      
+        <li>
+          <a class=footer-post href='/2018/04/10/hello-world/'>Hello World</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+      
+
+    </div>
+    <div class=row>
+      <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+        <ul class='list-inline footer-social-icons'></ul>
+      </div>
+    </div>
+    <div class=row>
+      <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+        <div class=footer-copyright>@Untitled. All right reserved | Design & Hexo</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script src=//code.jquery.com/jquery-2.1.4.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js></script>
+<script src=/js/main.js></script>
+
